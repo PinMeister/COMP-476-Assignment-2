@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public bool flee;
     public bool wander;
 
+    public bool navMesh;
+
     UnityEngine.AI.NavMeshAgent navMeshAgent;
 
     void Start()
@@ -36,31 +38,18 @@ public class Player : MonoBehaviour
     {
         animator.SetFloat("Blend", speed / maxSpeed);
 
-        /*if (Input.GetKeyDown("1"))
+        if (Input.GetKeyDown("1"))
         {
-            Debug.Log("Hello");
+            navMesh = true;
         }
 
-        //Appear on other side of arena when crossing a boundary
-        if (transform.position.z > 50)
+        if (Input.GetKeyDown("2"))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -45);
-        }
-        if (transform.position.z < -50)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 45);
-        }
-        if (transform.position.x > 50)
-        {
-            transform.position = new Vector3(-45, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x < -50)
-        {
-            transform.position = new Vector3(45, transform.position.y, transform.position.z);
+            navMesh = false;
         }
 
         // Set target and change character colour based on current tag
-        if (this.tag == "Tagged")
+        /*if (this.tag == "Tagged")
         {
             Target("Not Tagged");
             maxSpeed = 5;
@@ -200,6 +189,9 @@ public class Player : MonoBehaviour
 
     public void SetDestination(Vector3 location)
     {
-        navMeshAgent.SetDestination(location);
+        if (navMesh)
+        {
+            navMeshAgent.SetDestination(location);
+        }
     }
 }
