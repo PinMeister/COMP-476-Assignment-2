@@ -19,18 +19,27 @@ public class Player : MonoBehaviour
     public bool flee;
     public bool wander;
 
+    UnityEngine.AI.NavMeshAgent navMeshAgent;
+
     void Start()
     {
-        satRadius = 5;
-        targetRadius = 20;
-        timeToTarget = 0.5f;
-        rotationDegreesPerSecond = 360;
+        //satRadius = 5;
+        //targetRadius = 20;
+        //timeToTarget = 0.5f;
+        //rotationDegreesPerSecond = 360;
         animator = GetComponent<Animator>();
+
+        navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
     void Update()
     {
-        animator.SetFloat ("Blend", speed / maxSpeed);
+        animator.SetFloat("Blend", speed / maxSpeed);
+
+        /*if (Input.GetKeyDown("1"))
+        {
+            Debug.Log("Hello");
+        }
 
         //Appear on other side of arena when crossing a boundary
         if (transform.position.z > 50)
@@ -186,6 +195,11 @@ public class Player : MonoBehaviour
             collision.GetComponent<Player>().arrive = false;
             collision.GetComponent<Player>().flee = false;
             collision.GetComponent<Player>().wander = true;
-        }
+        }*/
+    }
+
+    public void SetDestination(Vector3 location)
+    {
+        navMeshAgent.SetDestination(location);
     }
 }
