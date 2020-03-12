@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -13,26 +14,24 @@ public class Player : MonoBehaviour
     float distance;
     public float speed;
     public float maxSpeed;
-    public float targetRadius;
     public float rotationDegreesPerSecond;
 
-    public bool arrive;
-    public bool flee;
-    public bool wander;
     public bool moving;
 
     UnityEngine.AI.NavMeshAgent navMeshAgent;
 
     PovGraph povGraph;
     public List<Node> pathList;
+    GameObject[] clusterArray;
+    public List<GameObject> clusterList;
+    public List<GameObject> individualList;
     public Node startNode;
     public Node goalNode;
-    public Cluster startCluster;
-    public Cluster goalCluster;
+    public GameObject startCluster;
+    public GameObject goalCluster;
 
     void Start()
     {
-        //targetRadius = 20;
         rotationDegreesPerSecond = 360;
         animator = GetComponent<Animator>();
 
@@ -41,31 +40,46 @@ public class Player : MonoBehaviour
         destination = transform.position;
         target = transform.position;
         moving = false;
+
+        clusterArray = GameObject.FindGameObjectsWithTag("Cluster");
+
+        foreach (GameObject cluster in clusterArray)
+        {
+            clusterList.Add(cluster);
+        }
+
+        individualList = clusterList;
     }
 
     void Update()
     {
         animator.SetFloat("Blend", speed / maxSpeed);
 
-        if (Input.GetMouseButtonDown(0))
+        if (SceneManager.GetActiveScene().name == "Astar Demo")
         {
-            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit mouseHit;
-
-            if (Physics.Raycast(mouseRay, out mouseHit))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (mouseHit.collider.tag == "Floor")
+                Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit mouseHit;
+
+                if (Physics.Raycast(mouseRay, out mouseHit))
                 {
-                    target = mouseHit.point;
-                    SetDestination(mouseHit.point);
-                    moving = true;
+                    if (mouseHit.collider.tag == "Floor")
+                    {
+                        target = mouseHit.point;
+                        SetDestination(mouseHit.point);
+                        if (povGraph.dijkstra || povGraph.euclidean || povGraph.cluster)
+                        {
+                            moving = true;
+                        }
+                    }
                 }
             }
         }
 
         if (moving)
         {
-            if ((startNode.transform.position - transform.position).magnitude < 1 && pathList.Contains(startNode))
+            if ((startNode.transform.position - transform.position).magnitude < 3 && pathList.Contains(startNode))
             {
                 transform.position = startNode.transform.position;
             }
@@ -83,128 +97,57 @@ public class Player : MonoBehaviour
         }
 
         // Set target and change character colour based on current tag
-        /*if (this.tag == "Tagged")
+        if (this.tag == "Tagged") //detect
         {
-            Target("Not Tagged");
-            maxSpeed = 5;
+            maxSpeed = 2;
             transform.GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(true);
-            transform.GetChild(2).gameObject.SetActive(false);
             transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            individualList.Remove(GameObject.FindGameObjectWithTag("NPC 1").GetComponent<Player>().startCluster);
+            individualList.Remove(GameObject.FindGameObjectWithTag("NPC 2").GetComponent<Player>().startCluster);
+            int randomIndex = Random.Range(0, 3);
+            if (!moving)
+            {
+                GameObject selectedCluster = individualList[randomIndex];
+                int randomNode = Random.Range(0, selectedCluster.transform.childCount);
+                goalNode = selectedCluster.transform.GetChild(randomNode).GetComponent<Node>();
+                SetDestination(goalNode.transform.position); //move
+                moving = true;
+            }
         }
-        else if (this.tag == "Frozen")
+        else if (this.tag == "NPC 1")
         {
-            speed = 0;
-            transform.GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetChild(2).gameObject.SetActive(true);
-            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        }
-        else
-        {
-            Target("Frozen");
             maxSpeed = 1;
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetChild(2).gameObject.SetActive(false);
             transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        }
-
-    
-        // Kinematic flee
-        if (flee)
-        {
-            Vector3 velocity = transform.position - destination;
-            velocity.Normalize();
-            velocity *= maxSpeed;
-            speed = maxSpeed;
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(velocity), rotationDegreesPerSecond * Time.deltaTime);
-        }
-
-        // Kinematic wander
-        if (wander && this.tag != "Frozen")
-        {
-            destination = new Vector3(Random.Range(0, 50), 0, Random.Range(0, 50));
-            velocity = destination - transform.position;
-            velocity.Normalize();
-            velocity *= maxSpeed;
-            speed = maxSpeed;
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(velocity), rotationDegreesPerSecond * Time.deltaTime);
-        }
-    }
-
-    // Find target depending on tag
-    void Target(string target)
-    {
-        // Use kinematic arrive for chosen target with appropriate tag
-        foreach (GameObject opponent in GameObject.FindGameObjectsWithTag(target))
-        {
-            if (Vector3.Distance(transform.position, opponent.transform.position) < targetRadius)
+            if (!moving)
             {
-                distance = Vector3.Distance(transform.position, opponent.transform.position);
-                destination = opponent.transform.position;
-                arrive = true;
-                flee = false;
-                wander = false;
-            }
-            else
-            {
-                arrive = false;
-                flee = false;
-                wander = true;
+                GameObject selectedCluster = GameObject.FindGameObjectWithTag("Tagged").GetComponent<Player>().goalNode.transform.parent.gameObject;
+                int randomNode = Random.Range(0, selectedCluster.transform.childCount);
+                goalNode = selectedCluster.transform.GetChild(randomNode).GetComponent<Node>();
+                SetDestination(goalNode.transform.position);
+                moving = true;
             }
         }
-
-        // Flee from tagged character if they are close enough
-        if (this.tag == "Not Tagged")
+        else if (this.tag == "NPC 2")
         {
-            GameObject taggedOpponent = GameObject.FindGameObjectWithTag("Tagged");
-            if (Vector3.Distance(transform.position, taggedOpponent.transform.position) < targetRadius)
+            maxSpeed = 1;
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            if (!moving)
             {
-                distance = Vector3.Distance(transform.position, taggedOpponent.transform.position);
-                destination = taggedOpponent.transform.position;
-                arrive = false;
-                flee = true;
-                wander = false;
-            }
-            else
-            {
-                arrive = false;
-                flee = false;
-                wander = true;
+                GameObject selectedCluster = GameObject.FindGameObjectWithTag("Tagged").GetComponent<Player>().goalNode.transform.parent.gameObject;
+                int randomNode = Random.Range(0, selectedCluster.transform.childCount);
+                goalNode = selectedCluster.transform.GetChild(randomNode).GetComponent<Node>();
+                SetDestination(goalNode.transform.position);
+                moving = true;
             }
         }
     }
 
-    // Change tags on collision
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.tag == "Not Tagged" && this.tag == "Tagged")
-        {
-            collision.tag = "Frozen";
-            arrive = false;
-            flee = false;
-            wander = true;
-            collision.GetComponent<Player>().arrive = false;
-            collision.GetComponent<Player>().flee = false;
-            collision.GetComponent<Player>().wander = false;
-        }
-        if (collision.tag == "Frozen" && this.tag == "Not Tagged")
-        {
-            collision.gameObject.tag = "Not Tagged";
-            arrive = false;
-            flee = false;
-            wander = true;
-            collision.GetComponent<Player>().arrive = false;
-            collision.GetComponent<Player>().flee = false;
-            collision.GetComponent<Player>().wander = true;
-        }
-    }*/
-    }
-
-    public void SetDestination(Vector3 location)
+    private void SetDestination(Vector3 location)
     {
         if (povGraph.navMesh)
         {
@@ -214,12 +157,9 @@ public class Player : MonoBehaviour
         {
             if (!pathList.Any())
             {
-                povGraph.createPath(this.transform.position, location);
-                pathList = povGraph.pathList;
-                startNode = pathList[0];
-                goalNode = pathList[pathList.Count - 1];
-                startCluster = startNode.GetComponentInParent<Cluster>();
-                goalCluster = goalNode.GetComponentInParent<Cluster>();
+                povGraph.createPath(this.transform.position, location, this.GetComponent<Player>());
+                startCluster = startNode.transform.parent.gameObject;
+                goalCluster = goalNode.transform.parent.gameObject;
                 destination = pathList[0].transform.position;
             }
         }
@@ -227,18 +167,52 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Node")
+        if (collider.tag == "Node" && !povGraph.navMesh)
         {
-            if (pathList.Count() == 1)
+            if (!pathList.Any())
             {
-                pathList.Remove(collider.GetComponent<Node>());
-                destination = target;
+                if (SceneManager.GetActiveScene().name == "Astar Demo")
+                {
+                    destination = target;
+                }
+                else //set new goal node
+                {
+                    if (this.tag == "Tagged") // detect
+                    {
+                        individualList = clusterList;
+                        individualList.Remove(GameObject.FindGameObjectWithTag("NPC 1").GetComponent<Player>().startCluster);
+                        individualList.Remove(GameObject.FindGameObjectWithTag("NPC 2").GetComponent<Player>().startCluster);
+                        int randomIndex = Random.Range(0, 3);
+                        GameObject selectedCluster = individualList[randomIndex];
+                        int randomNode = Random.Range(0, selectedCluster.transform.childCount);
+                        goalNode = selectedCluster.transform.GetChild(randomNode).GetComponent<Node>();
+                        SetDestination(goalNode.transform.position); //move
+                    }
+                    else if (this.tag == "NPC 1")
+                    {
+                        GameObject selectedCluster = GameObject.FindGameObjectWithTag("Tagged").GetComponent<Player>().goalCluster;
+                        int randomNode = Random.Range(0, selectedCluster.transform.childCount);
+                        goalNode = selectedCluster.transform.GetChild(randomNode).GetComponent<Node>();
+                        SetDestination(goalNode.transform.position);
+                    }
+                    else if (this.tag == "NPC 2")
+                    {
+                        GameObject selectedCluster = GameObject.FindGameObjectWithTag("Tagged").GetComponent<Player>().goalCluster;
+                        int randomNode = Random.Range(0, selectedCluster.transform.childCount);
+                        goalNode = selectedCluster.transform.GetChild(randomNode).GetComponent<Node>();
+                        SetDestination(goalNode.transform.position);
+                    }
+                }
             }
             else
             {
                 pathList.Remove(collider.GetComponent<Node>());
                 destination = pathList[0].transform.position;
             }
+        }
+        if (collider.tag == "Tagged") // reload scene if others tag "it"
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

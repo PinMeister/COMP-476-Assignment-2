@@ -8,6 +8,10 @@ TagManager:
   - Not Tagged
   - Floor
   - Node
+  - NPC 1
+  - NPC 2
+  - Cluster
+  - Tagged
   layers:
   - Default
   - TransparentFX

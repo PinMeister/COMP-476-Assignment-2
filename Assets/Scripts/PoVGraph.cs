@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PovGraph : MonoBehaviour
 {
@@ -8,14 +9,9 @@ public class PovGraph : MonoBehaviour
     public bool dijkstra;
     public bool euclidean;
     public bool cluster;
-
-    public Node startNode;
-    public Node goalNode;
-
     public GameObject[] nodeList;
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
-    public List<Node> pathList = new List<Node>();
 
     Material fill;
     Material noFill;
@@ -33,38 +29,54 @@ public class PovGraph : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("1"))
+        if (SceneManager.GetActiveScene().name == "Astar Demo")
+        {
+            if (Input.GetKeyDown("1"))
+            {
+                navMesh = true;
+                dijkstra = false;
+                euclidean = false;
+                cluster = false;
+            }
+
+            if (Input.GetKeyDown("2"))
+            {
+                navMesh = false;
+                dijkstra = true;
+                euclidean = false;
+                cluster = false;
+            }
+
+            if (Input.GetKeyDown("3"))
+            {
+                navMesh = false;
+                dijkstra = false;
+                euclidean = true;
+                cluster = false;
+            }
+
+            if (Input.GetKeyDown("4"))
+            {
+                navMesh = false;
+                dijkstra = false;
+                euclidean = false;
+                cluster = true;
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "Robot Tag NavMesh")
         {
             navMesh = true;
             dijkstra = false;
             euclidean = false;
             cluster = false;
         }
-
-        if (Input.GetKeyDown("2"))
-        {
-            navMesh = false;
-            dijkstra = true;
-            euclidean = false;
-            cluster = false;
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            navMesh = false;
-            dijkstra = false;
-            euclidean = true;
-            cluster = false;
-        }
-
-        if (Input.GetKeyDown("4"))
+        else if (SceneManager.GetActiveScene().name == "Robot Tag Cluster")
         {
             navMesh = false;
             dijkstra = false;
             euclidean = false;
             cluster = true;
         }
-
     }
 
     private float distance(Vector3 start, Vector3 destination)
@@ -72,25 +84,29 @@ public class PovGraph : MonoBehaviour
         return (start - destination).magnitude;
     }
 
-    public List<Node> createPath(Vector3 start, Vector3 destination)
+    public void createPath(Vector3 start, Vector3 destination, Player player)
     {
         openList.Clear();
         closedList.Clear();
-        pathList.Clear();
+        player.pathList.Clear();
 
-        foreach (GameObject node in nodeList)
+        if (SceneManager.GetActiveScene().name == "Astar Demo")
         {
-            node.GetComponent<Renderer>().material = noFill;
+            foreach (GameObject node in nodeList)
+            {
+                node.GetComponent<Renderer>().material = noFill;
+            }
         }
-        
-        startNode = nodeList[0].GetComponent<Node>();
-        goalNode = nodeList[0].GetComponent<Node>();
 
-        startNode.costSoFar = 0;
+        player.startNode = nodeList[0].GetComponent<Node>();
+        Debug.Log(player.startNode);
+        player.goalNode = nodeList[0].GetComponent<Node>();
+
+        player.startNode.costSoFar = 0;
 
         foreach (GameObject node in nodeList)
         {
-            if (distance(start, node.transform.position) < distance(start, startNode.transform.position))
+            if (distance(start, node.transform.position) < distance(start, player.startNode.transform.position))
             {
                 RaycastHit startHit;
                 Ray startEdge;
@@ -100,46 +116,59 @@ public class PovGraph : MonoBehaviour
                 Physics.Raycast(startEdge, out startHit);
                 if (startHit.collider.tag == "Node")
                 {
-                    startNode = node.GetComponent<Node>();
+                    player.startNode = node.GetComponent<Node>();
                 }
             }
 
-            if (distance(node.transform.position, destination) < distance(goalNode.transform.position, destination))
+            if (SceneManager.GetActiveScene().name == "Astar Demo")
             {
-                RaycastHit goalHit;
-                Ray goalEdge;
-                Vector3 goalDirection = node.transform.position - destination;
-                goalEdge = new Ray(destination, goalDirection);
-
-                Physics.Raycast(goalEdge, out goalHit);
-                if (goalHit.collider.tag == "Node")
+                if (distance(node.transform.position, destination) < distance(player.goalNode.transform.position, destination))
                 {
-                    goalNode = node.GetComponent<Node>();
+                    RaycastHit goalHit;
+                    Ray goalEdge;
+                    Vector3 goalDirection = node.transform.position - destination;
+                    goalEdge = new Ray(destination, goalDirection);
+
+                    Physics.Raycast(goalEdge, out goalHit);
+                    if (goalHit.collider.tag == "Node")
+                    {
+                        player.goalNode = node.GetComponent<Node>();
+                    }
+                }
+            }
+            else
+            {
+                foreach (GameObject foundNode in nodeList)
+                {
+                    if (foundNode.transform.position == destination)
+                    {
+                        player.goalNode = foundNode.GetComponent<Node>();
+                        break;
+                    }
                 }
             }
         }
-
-        startNode.GetComponent<Renderer>().material = fill;
-        goalNode.GetComponent<Renderer>().material = fill;
-        Debug.DrawRay(start, startNode.transform.position - start, Color.red, 10);
-        Debug.DrawRay(destination, goalNode.transform.position - destination, Color.red, 10);
+        player.startNode.GetComponent<Renderer>().material = fill;
+        player.goalNode.GetComponent<Renderer>().material = fill;
+        Debug.DrawRay(start, player.startNode.transform.position - start, Color.red, 10);
+        Debug.DrawRay(destination, player.goalNode.transform.position - destination, Color.red, 10);
 
         if (dijkstra || euclidean || cluster)
         {
-            openList.Add(startNode);
+            openList.Add(player.startNode);
 
             if (dijkstra)
             {
-                startNode.heuristic = 0;
+                player.startNode.heuristic = 0;
             }
 
             if (euclidean || cluster)
             {
-                startNode.heuristic = distance(startNode.transform.position, goalNode.transform.position);
-                startNode.total = startNode.costSoFar + startNode.heuristic;
+                player.startNode.heuristic = distance(player.startNode.transform.position, player.goalNode.transform.position);
+                player.startNode.total = player.startNode.costSoFar + player.startNode.heuristic;
             }
 
-            while (!closedList.Contains(goalNode))
+            while (!closedList.Contains(player.goalNode))
             {
                 Node currentNode = openList[0];
 
@@ -151,7 +180,11 @@ public class PovGraph : MonoBehaviour
                     }
                 }
 
-                currentNode.GetComponent<Renderer>().material = fill;
+                if (SceneManager.GetActiveScene().name == "Astar Demo")
+                {
+                    currentNode.GetComponent<Renderer>().material = fill;
+                }
+
                 openList.Remove(currentNode);
                 closedList.Add(currentNode);
 
@@ -178,12 +211,12 @@ public class PovGraph : MonoBehaviour
 
                     if (euclidean)
                     {
-                        adjacentNode.heuristic = distance(adjacentNode.transform.position, goalNode.transform.position);
+                        adjacentNode.heuristic = distance(adjacentNode.transform.position, player.goalNode.transform.position);
                     }
 
                     if (cluster)
                     {
-                        adjacentNode.heuristic = distance(adjacentNode.transform.position, goalNode.transform.position) + clusterLookup(adjacentNode, goalNode);
+                        adjacentNode.heuristic = distance(adjacentNode.transform.position, player.goalNode.transform.position) + clusterLookup(adjacentNode, player.goalNode);
                     }
 
                     if (closedList.Contains(adjacentNode) && cost < adjacentNode.costSoFar)
@@ -212,25 +245,24 @@ public class PovGraph : MonoBehaviour
                 }
             }
 
-            pathList.Add(goalNode);
+            player.pathList.Add(player.goalNode);
 
             while (true)
             {
-                if (pathList[pathList.Count - 1].previousNode == startNode)
+                if (player.pathList[player.pathList.Count - 1].previousNode == player.startNode)
                 {
-                    pathList.Add(pathList[pathList.Count - 1].previousNode);
-                    Debug.DrawRay(pathList[pathList.Count - 1].transform.position, pathList[pathList.Count - 2].transform.position - pathList[pathList.Count - 1].transform.position, Color.red, 10);
-                    pathList.Reverse();
-                    return pathList;
+                    player.pathList.Add(player.pathList[player.pathList.Count - 1].previousNode);
+                    Debug.DrawRay(player.pathList[player.pathList.Count - 1].transform.position, player.pathList[player.pathList.Count - 2].transform.position - player.pathList[player.pathList.Count - 1].transform.position, Color.red, 10);
+                    player.pathList.Reverse();
+                    break;
                 }
                 else
                 {
-                    pathList.Add(pathList[pathList.Count - 1].previousNode);
-                    Debug.DrawRay(pathList[pathList.Count - 1].transform.position, pathList[pathList.Count - 2].transform.position - pathList[pathList.Count - 1].transform.position, Color.red, 10);
+                    player.pathList.Add(player.pathList[player.pathList.Count - 1].previousNode);
+                    Debug.DrawRay(player.pathList[player.pathList.Count - 1].transform.position, player.pathList[player.pathList.Count - 2].transform.position - player.pathList[player.pathList.Count - 1].transform.position, Color.red, 10);
                 }
             }
         }
-        return pathList;
     }
 
     private float clusterLookup(Node startNode, Node goalNode)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Node : MonoBehaviour
 {
@@ -33,7 +34,11 @@ public class Node : MonoBehaviour
                 if (hit.collider.tag == "Node" && hit.collider.name == nodeList[i].name)
                 {
                     visibleNodes.Add(nodeList[i].GetComponent<Node>());
-                    //Debug.DrawRay(transform.position, rayDirection, Color.green, 300);
+
+                    if (SceneManager.GetActiveScene().name == "Astar Demo")
+                    {
+                        //Debug.DrawRay(transform.position, rayDirection, Color.green, 300);
+                    }
                 }
             }
         }
