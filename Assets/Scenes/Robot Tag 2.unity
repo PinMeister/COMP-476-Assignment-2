@@ -162,7 +162,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7444985}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -273,7 +274,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9067902}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -525,7 +527,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40476857}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -589,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -806,7 +809,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99455431}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -45, y: 0.1, z: 43.7}
+  m_LocalPosition: {x: -45, y: 0.1, z: 44}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 148651526}
@@ -820,7 +823,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99455431}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -884,6 +887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -931,7 +935,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 138986009}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -995,6 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -1096,7 +1101,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197363991}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1160,6 +1165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -1299,7 +1305,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256755612}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1363,6 +1369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -1410,7 +1417,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320905417}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1474,6 +1481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -1613,7 +1621,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336730810}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1677,6 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -1724,7 +1733,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340052804}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1788,6 +1797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -2019,7 +2029,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451478939}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -2083,6 +2093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -2130,7 +2141,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455870766}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -2194,6 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -2241,7 +2253,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469226896}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -2305,6 +2317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -2962,7 +2975,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608562501}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -3026,6 +3039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -3073,7 +3087,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621517635}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -3137,6 +3151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -3184,7 +3199,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628377837}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -3248,6 +3263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -3295,7 +3311,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686737217}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -3359,6 +3375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -3406,7 +3423,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698566187}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -3470,6 +3487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -3517,7 +3535,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730610054}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -3581,6 +3599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -4228,7 +4247,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871041125}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -4292,6 +4311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -4389,7 +4409,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883069509}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -4453,6 +4473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -4500,7 +4521,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963890869}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -4564,6 +4585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -4887,7 +4909,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039797350}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -4951,6 +4973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -4998,7 +5021,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066911257}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -5062,6 +5085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -5293,7 +5317,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129965961}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -5357,6 +5381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -5404,7 +5429,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158994096}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -5468,6 +5493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -6033,7 +6059,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357766962}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -6097,6 +6123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -6328,7 +6355,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449283053}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -6392,6 +6419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -6531,7 +6559,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462686546}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -6595,6 +6623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -6826,7 +6855,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581768240}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -6890,6 +6919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -6920,6 +6950,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398867636340031650, guid: 6cbe38da129c58b4bafb068652a8001c,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7398867636487557161, guid: 6cbe38da129c58b4bafb068652a8001c,
         type: 3}
@@ -7308,7 +7343,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602874711}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -7372,6 +7407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -7419,7 +7455,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605937231}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -7483,6 +7519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -7530,7 +7567,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619453849}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -7594,6 +7631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -7733,7 +7771,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663805003}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -7797,6 +7835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -7936,7 +7975,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756200820}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8000,6 +8039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -8047,7 +8087,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757009835}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8111,6 +8151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -8158,7 +8199,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762766242}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8222,6 +8263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -8322,7 +8364,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836243553}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8386,6 +8428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -8433,7 +8476,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879871160}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8497,6 +8540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -8579,7 +8623,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024970619}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8643,6 +8687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -8782,7 +8827,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076722195}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8846,6 +8891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -8893,7 +8939,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086560076}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -8957,6 +9003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0
@@ -9004,7 +9051,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146311066}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -9068,6 +9115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c085d977d4af7041b600ea6c93b5f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeList: []
   visibleNodes: []
   costSoFar: 0
   heuristic: 0

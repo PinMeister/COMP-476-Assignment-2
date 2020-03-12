@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
     Animator animator;
 
     Vector3 destination;
+    Vector3 target;
     Vector3 velocity;
     float distance;
     public float speed;
     public float maxSpeed;
-    public float satRadius;
     public float targetRadius;
-    public float timeToTarget;
     public float rotationDegreesPerSecond;
 
     public bool arrive;
     public bool flee;
     public bool wander;
+    public bool moving;
 
     UnityEngine.AI.NavMeshAgent navMeshAgent;
 
     PovGraph povGraph;
+    public List<Node> pathList;
     public Node startNode;
     public Node goalNode;
     public Cluster startCluster;
@@ -29,14 +32,15 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //satRadius = 5;
         //targetRadius = 20;
-        //timeToTarget = 0.5f;
-        //rotationDegreesPerSecond = 360;
+        rotationDegreesPerSecond = 360;
         animator = GetComponent<Animator>();
 
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         povGraph = GameObject.Find("PoV Nodes").GetComponent<PovGraph>();
+        destination = transform.position;
+        target = transform.position;
+        moving = false;
     }
 
     void Update()
@@ -52,14 +56,31 @@ public class Player : MonoBehaviour
             {
                 if (mouseHit.collider.tag == "Floor")
                 {
+                    target = mouseHit.point;
                     SetDestination(mouseHit.point);
+                    moving = true;
                 }
             }
-
-            startCluster = startNode.GetComponentInParent<Cluster>();
-            goalCluster = goalNode.GetComponentInParent<Cluster>();
         }
 
+        if (moving)
+        {
+            if ((startNode.transform.position - transform.position).magnitude < 1 && pathList.Contains(startNode))
+            {
+                transform.position = startNode.transform.position;
+            }
+
+            // Kinematic arrive
+            Vector3 velocity = destination - transform.position;
+            if (velocity.magnitude > maxSpeed)
+            {
+                velocity.Normalize();
+                velocity *= maxSpeed;
+                speed = maxSpeed;
+            }
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(velocity), rotationDegreesPerSecond * Time.deltaTime);
+        }
 
         // Set target and change character colour based on current tag
         /*if (this.tag == "Tagged")
@@ -89,24 +110,6 @@ public class Player : MonoBehaviour
             transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
 
-        // Kinematic arrive
-        if (arrive)
-        {
-            Vector3 velocity = destination - transform.position;
-            if (velocity.magnitude < satRadius)
-            {
-                speed = 0;
-            }
-            velocity /= timeToTarget;
-            if (velocity.magnitude > maxSpeed)
-            {
-                velocity.Normalize();
-                velocity *= maxSpeed;
-                speed = maxSpeed;
-            }
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(velocity), rotationDegreesPerSecond * Time.deltaTime);
-        }
     
         // Kinematic flee
         if (flee)
@@ -203,15 +206,39 @@ public class Player : MonoBehaviour
 
     public void SetDestination(Vector3 location)
     {
-        if (GameObject.Find("PoV Nodes").GetComponent<PovGraph>().navMesh)
+        if (povGraph.navMesh)
         {
             navMeshAgent.SetDestination(location);
         }
-        else
+        else if (povGraph.dijkstra || povGraph.euclidean || povGraph.cluster)
         {
-            povGraph.createPath(this.transform.position, location);
-            startNode = povGraph.startNode;
-            goalNode = povGraph.goalNode;
+            if (!pathList.Any())
+            {
+                povGraph.createPath(this.transform.position, location);
+                pathList = povGraph.pathList;
+                startNode = pathList[0];
+                goalNode = pathList[pathList.Count - 1];
+                startCluster = startNode.GetComponentInParent<Cluster>();
+                goalCluster = goalNode.GetComponentInParent<Cluster>();
+                destination = pathList[0].transform.position;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "Node")
+        {
+            if (pathList.Count() == 1)
+            {
+                pathList.Remove(collider.GetComponent<Node>());
+                destination = target;
+            }
+            else
+            {
+                pathList.Remove(collider.GetComponent<Node>());
+                destination = pathList[0].transform.position;
+            }
         }
     }
 }

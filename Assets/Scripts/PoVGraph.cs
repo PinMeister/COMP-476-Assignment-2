@@ -11,15 +11,11 @@ public class PovGraph : MonoBehaviour
 
     public Node startNode;
     public Node goalNode;
-    public Node clusterStartNode;
-    public Node clusterGoalNode;
 
     public GameObject[] nodeList;
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
     public List<Node> pathList = new List<Node>();
-    public List<Node> clusterOpenList = new List<Node>();
-    public List<Node> clusterClosedList = new List<Node>();
 
     Material fill;
     Material noFill;
@@ -76,7 +72,7 @@ public class PovGraph : MonoBehaviour
         return (start - destination).magnitude;
     }
 
-    public void createPath(Vector3 start, Vector3 destination)
+    public List<Node> createPath(Vector3 start, Vector3 destination)
     {
         openList.Clear();
         closedList.Clear();
@@ -224,7 +220,8 @@ public class PovGraph : MonoBehaviour
                 {
                     pathList.Add(pathList[pathList.Count - 1].previousNode);
                     Debug.DrawRay(pathList[pathList.Count - 1].transform.position, pathList[pathList.Count - 2].transform.position - pathList[pathList.Count - 1].transform.position, Color.red, 10);
-                    break;
+                    pathList.Reverse();
+                    return pathList;
                 }
                 else
                 {
@@ -233,11 +230,11 @@ public class PovGraph : MonoBehaviour
                 }
             }
         }
+        return pathList;
     }
 
     private float clusterLookup(Node startNode, Node goalNode)
     {
-        Debug.Log("Looking up " + startNode + " in " + startNode.transform.parent.name + " and " + goalNode + " in " + goalNode.transform.parent.name);
         switch (startNode.transform.parent.name)
         {
             case "Cluster":
