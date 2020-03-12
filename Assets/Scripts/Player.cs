@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     Animator animator;
-    
+
     Vector3 destination;
     Vector3 velocity;
     float distance;
@@ -19,9 +19,13 @@ public class Player : MonoBehaviour
     public bool flee;
     public bool wander;
 
-    public bool navMesh;
-
     UnityEngine.AI.NavMeshAgent navMeshAgent;
+
+    PovGraph povGraph;
+    public Node startNode;
+    public Node goalNode;
+    public Cluster startCluster;
+    public Cluster goalCluster;
 
     void Start()
     {
@@ -32,21 +36,30 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
 
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        povGraph = GameObject.Find("PoV Nodes").GetComponent<PovGraph>();
     }
 
     void Update()
     {
         animator.SetFloat("Blend", speed / maxSpeed);
 
-        if (Input.GetKeyDown("1"))
+        if (Input.GetMouseButtonDown(0))
         {
-            navMesh = true;
+            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit mouseHit;
+
+            if (Physics.Raycast(mouseRay, out mouseHit))
+            {
+                if (mouseHit.collider.tag == "Floor")
+                {
+                    SetDestination(mouseHit.point);
+                }
+            }
+
+            startCluster = startNode.GetComponentInParent<Cluster>();
+            goalCluster = goalNode.GetComponentInParent<Cluster>();
         }
 
-        if (Input.GetKeyDown("2"))
-        {
-            navMesh = false;
-        }
 
         // Set target and change character colour based on current tag
         /*if (this.tag == "Tagged")
@@ -184,14 +197,21 @@ public class Player : MonoBehaviour
             collision.GetComponent<Player>().arrive = false;
             collision.GetComponent<Player>().flee = false;
             collision.GetComponent<Player>().wander = true;
-        }*/
+        }
+    }*/
     }
 
     public void SetDestination(Vector3 location)
     {
-        if (navMesh)
+        if (GameObject.Find("PoV Nodes").GetComponent<PovGraph>().navMesh)
         {
             navMeshAgent.SetDestination(location);
+        }
+        else
+        {
+            povGraph.createPath(this.transform.position, location);
+            startNode = povGraph.startNode;
+            goalNode = povGraph.goalNode;
         }
     }
 }

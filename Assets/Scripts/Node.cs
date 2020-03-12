@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    GameObject[] nodeList;
-    public List<GameObject> visibleNodes;
+    public GameObject[] nodeList;
+    public List<Node> visibleNodes;
+    public float costSoFar;
+    public float heuristic;
+    public float total;
+    public Node previousNode;
 
-    // Start is called before the first frame update
     void Start()
     {
         nodeList = GameObject.FindGameObjectsWithTag("Node");
         findVisibleNodes();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    
     private void findVisibleNodes()
     {
         RaycastHit hit;
@@ -32,10 +30,10 @@ public class Node : MonoBehaviour
             {
                 edge = new Ray(transform.position, rayDirection);
                 Physics.Raycast(edge, out hit);
-                if (hit.collider.tag == "Node" && hit.collider.gameObject.name == nodeList[i].name)
+                if (hit.collider.tag == "Node" && hit.collider.name == nodeList[i].name)
                 {
-                    visibleNodes.Add(nodeList[i]);
-                    Debug.DrawRay(transform.position, rayDirection, Color.green, 300);
+                    visibleNodes.Add(nodeList[i].GetComponent<Node>());
+                    //Debug.DrawRay(transform.position, rayDirection, Color.green, 300);
                 }
             }
         }
